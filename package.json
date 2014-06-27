@@ -1,0 +1,25 @@
+{
+  "name": "check-password",
+  "version": "0.0.1",
+  "description": "Checks password for dovecot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "qmail",
+    "maildir",
+    "dovecot"
+  ],
+  "author": "Mohammad Anwari <mdamt@mdamt.net>",
+  "license": "MIT",
+  "preferGlobal": "true",
+  "bin": {
+    "check-password": "index.js"
+  },
+  "dependencies": {
+    "buffer-split": "0.0.0",
+    "mongoose": "^3.8.12",
+    "openldap_ssha": "0.0.4"
+  }
+}
