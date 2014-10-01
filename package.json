@@ -20,6 +20,7 @@
   "dependencies": {
     "buffer-split": "0.0.0",
     "mongoose": "^3.8.12",
+    "nan-bcrypt": "^0.7.9",
     "openldap_ssha": "0.0.4"
   }
 }
