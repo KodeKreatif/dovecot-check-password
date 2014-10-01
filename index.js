@@ -36,7 +36,8 @@ var start = function(email, password) {
     }
     var task = User.findOne({
       username: username,
-      domain: domainResult._id
+      domain: domainResult._id,
+      state: "active"
     });
     task.exec(function(e, result) {
       var success = function(passOk) {

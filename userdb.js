@@ -15,7 +15,7 @@ var start = function(email, cb) {
 
   var domainQuery = Domain.findOne({name:domain});
   domainQuery.exec(function(e, domainResult) {
-    var task = User.findOne({domain: domainResult._id, username:username});
+    var task = User.findOne({domain: domainResult._id, username:username, state: "active"});
     task.exec(function(e, result) {
       if (result) {
         var arg = {};
