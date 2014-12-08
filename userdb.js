@@ -36,6 +36,7 @@ var start = function(email, cb) {
 var net = require("net");
 var server = net.createServer(function(c) { 
   c.on("data", function(data) {
+// Protocol is here: http://hg.dovecot.org/dovecot-2.2/file/tip/src/lib-dict/dict-client.h
 var lines = data.toString().split("\n");
     for (var i = 0; i < lines.length; i ++) {
 
