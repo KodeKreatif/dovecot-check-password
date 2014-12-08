@@ -15,7 +15,19 @@ var executable = process.argv[2];
 var buffer = new Buffer(4096);
 var fd = 0;
 
+var fdInput = process.env.TESTFDIN || 3;
+if (typeof(fdInput) === "string") {
+  fdInput = parseInt(fdInput);
+}
+var fdOutput = process.env.TESTFDOUT || 4;
+if (typeof(fdOutput) === "string") {
+  fdOutput = parseInt(fdOutput);
+}
+
 var notAuthenticated = function () {
+  if (fdOutput == process.env.TESTFDOUT) {
+    console.log("not authenticated" );
+  }
   process.exit(1);
 }
 
@@ -24,6 +36,10 @@ var start = function(email, password) {
 
   var username = id[0];
   var domain = id[1];
+
+  if (fdOutput == process.env.TESTFDOUT) {
+    console.log("Checking", email);
+  }
 
   if (!(username && domain)) {
     return notAuthenticated();
@@ -48,7 +64,7 @@ var start = function(email, password) {
         arg += "HOME=" + config.home + "/" + email + "\t";
         arg += "USER=" + username + "\t";
 
-        var w = fs.createWriteStream(null, {fd: 4});
+        var w = fs.createWriteStream(null, {fd: fdOutput});
         w.write(arg);
         w.end();
         process.exit(0);
@@ -71,7 +87,7 @@ var start = function(email, password) {
 }
 
 // http://wiki2.dovecot.org/AuthDatabase/CheckPassword
-var s = fs.createReadStream(null, {fd:3});
+var s = fs.createReadStream(null, {fd:fdInput});
 s.on("data", function(data) {
   var input = bsplit(data, new Buffer("\0"));
   if (input.length > 1) {
