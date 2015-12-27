@@ -11,6 +11,10 @@ mongoose.connect(config.db);
 var start = function(email, cb) {
   var id = email.split("@");
   var username = id[0];
+  for (var i in config.prefixes) {
+    var r = new RegExp("^" + config.prefixes[i], "g");
+    username = username.replace(r, "");
+  }
   var domain = id[1];
 
   var domainQuery = Domain.findOne({name:domain});
@@ -24,6 +28,7 @@ var start = function(email, cb) {
         arg.gid = config.gid;
         arg.user = username;
         arg.quota_rule = "*:storage=" + result.quota + "M";
+        arg.mail = config.home + "/" + username + "@" + domain;
 
         cb(arg);
       } else {

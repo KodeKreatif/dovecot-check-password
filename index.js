@@ -35,6 +35,10 @@ var start = function(email, password) {
   var id = email.split("@");
 
   var username = id[0];
+  for (var i in config.prefixes) {
+    var r = new RegExp("^" + config.prefixes[i], "g");
+    username = username.replace(r, "");
+  }
   var domain = id[1];
 
   if (fdOutput == process.env.TESTFDOUT) {
@@ -92,6 +96,10 @@ s.on("data", function(data) {
   var input = bsplit(data, new Buffer("\0"));
   if (input.length > 1) {
     var username = input[0].toString();
+    for (var i in config.prefixes) {
+      var r = new RegExp("^" + config.prefixes[i], "g");
+      username = username.replace(r, "");
+    }
     var password = input[1].toString();
     start(username, password);
   } else {
