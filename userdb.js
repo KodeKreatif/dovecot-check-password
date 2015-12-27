@@ -28,6 +28,7 @@ var start = function(email, cb) {
         arg.gid = config.gid;
         arg.user = username;
         arg.quota_rule = "*:storage=" + result.quota + "M";
+        arg.mail = config.home + "/" + username + "@" + domain;
 
         cb(arg);
       } else {
