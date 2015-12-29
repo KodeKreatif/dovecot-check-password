@@ -6,6 +6,7 @@ var config = {
   // Socket name, remove this file before starting 
   socket: "./test.socket",
   home: "/home",
+  mail: "/mail",
 
   // Prefix is used to mark off authentication, whether it comming from webmail or not
   prefixes : [
